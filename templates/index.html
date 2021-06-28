@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserAPI</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            loadUpdate();
+        });
+
+        function loadUpdate(){
+
+            var e = document.getElementById("users").value;
+            var jsonData = {};
+            jsonData["email"] = e;
+            console.log(jsonData)
+            $.ajax({
+                    type: "POST",
+                        url: "/loadData",
+                        data:jsonData
+                    })
+                    .done(function(data){
+                        console.log(data);
+                        $('#oldemail').val(data[1]);
+                        $('#newusername').val(data[0]);
+                        $('#newemail').val(data[1]);
+                        $('#newphno').val(data[2]);
+                    });
+        }
+    </script>
+</head>
+<body>
+
+<a href="/logout">Logout</a>
+<table border="1" cellspacing="0">
+<caption>User Details</caption>
+<tr><th>Name<th>Email<th>PhoneNumber
+    {% for user in userLst %}
+    <tr>
+    {% for key, value in user.items() %}
+      <td>{{value}}</td>
+    {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br><br>
+
+<p>Update User</p>
+
+<select name="users" id="users" onchange="loadUpdate()">
+    {% for user in userLst %}
+    <tr>
+    {% for key, value in user.items() %}
+        {% if key == 'emailid' %}
+      <option value="{{value}}">{{value}}</option>
+        {% endif %}
+    {% endfor %}
+    </tr>
+    {% endfor %}
+
+</select>
+
+<form action="/updateUser" method="post">
+    <input type="hidden" id="oldemail" name="oldemail">
+    Enter name to be changed : <input type="text" id="newusername" name="newusername">
+    Enter email Id to be changed : <input type="text" id="newemail" name="newemail">
+    Enter phone number to be changed : <input type="text" id="newphno" name="newphno">
+    <input type="submit">
+</form>
+</body>
+</html>

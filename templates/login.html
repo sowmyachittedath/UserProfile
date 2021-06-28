@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/register">Register</a>
+<br>
+		<h4>Please Login:</h4>
+		<br>
+		<form action=""  method="post">
+			<input type="text"  placeholder = "Username" name="username" value="{{request.form.username}}">
+			<input type="password" placeholder = "Password" name="password" value="{{request.form.password}}">
+			<input type="submit" value="Login">
+		</form>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Flask
+itsdangerous==1.1.0
+MarkupSafe==1.1.1
+Werkzeug==0.15.5
+flask-sqlalchemy
+flask-wtf
+pymysql
